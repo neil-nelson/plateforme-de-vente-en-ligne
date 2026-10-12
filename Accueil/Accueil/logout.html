@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Déconnexion - Second Main</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .logout-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .logout-card {
+            background-color: white;
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+            animation: fadeInUp 0.6s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .logout-icon {
+            font-size: 80px;
+            color: #3498db;
+            margin-bottom: 25px;
+            animation: bounce 1s ease infinite alternate;
+        }
+        
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+        
+        .logout-title {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+        .logout-message {
+            color: #7f8c8d;
+            margin-bottom: 35px;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .logout-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 16px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .btn-login {
+            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+            color: white;
+        }
+        
+        .btn-login:hover {
+            background: linear-gradient(135deg, #2980b9 0%, #1a252f 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn-home {
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .btn-home:hover {
+            background-color: #e9ecef;
+            border-color: #3498db;
+            transform: translateY(-3px);
+        }
+        
+        .logout-info {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #95a5a6;
+            font-size: 14px;
+        }
+        
+        .logout-info i {
+            margin-right: 5px;
+        }
+        
+        @media (max-width: 480px) {
+            .logout-card {
+                padding: 30px 20px;
+            }
+            
+            .logout-icon {
+                font-size: 60px;
+            }
+            
+            .logout-title {
+                font-size: 24px;
+            }
+            
+            .btn {
+                padding: 14px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logout-container">
+        <div class="logout-card">
+            <div class="logout-icon">
+                <i class="fas fa-sign-out-alt"></i>
+            </div>
+            <h2 class="logout-title">Déconnexion réussie</h2>
+            <p class="logout-message">
+                Vous avez été déconnecté de votre compte avec succès.<br>
+                Merci d'avoir utilisé Second Main. Nous espérons vous revoir bientôt !
+            </p>
+            <div class="logout-actions">
+                <a href="login.html" class="btn btn-login">
+                    <i class="fas fa-sign-in-alt"></i> Se connecter à nouveau
+                </a>
+                <a href="index.html" class="btn btn-home">
+                    <i class="fas fa-home"></i> Retour à l'accueil
+                </a>
+            </div>
+            <div class="logout-info">
+                <p><i class="fas fa-shield-alt"></i> Vos données ont été sécurisées</p>
+                <p><i class="fas fa-clock"></i> Session fermée à <span id="logoutTime"></span></p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Afficher l'heure de déconnexion
+        const now = new Date();
+        const logoutTime = document.getElementById('logoutTime');
+        if (logoutTime) {
+            logoutTime.textContent = now.toLocaleTimeString('fr-FR', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+        
+        // Effacer les données de session au chargement
+        document.addEventListener('DOMContentLoaded', function() {
+            // Récupérer le nom de l'utilisateur avant de le déconnecter
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            const userName = currentUser.firstname || currentUser.username || 'Utilisateur';
+            
+            // Afficher un message personnalisé
+            setTimeout(() => {
+                alert(`À bientôt ${userName} ! Votre session a été sécurisée.`);
+            }, 500);
+            
+            // Effacer toutes les données de session
+            const sessionData = [
+                'currentUser',
+                'currentUserId',
+                'currentUserName',
+                'userLoggedIn',
+                'userToken',
+                'lastLogin'
+            ];
+            
+            sessionData.forEach(key => {
+                localStorage.removeItem(key);
+            });
+            
+            // Effacer les données spécifiques si nécessaire
+            localStorage.removeItem('userArticles');
+            localStorage.removeItem('userStats');
+            
+            console.log('Déconnexion complète effectuée');
+            
+            // Redirection automatique après 30 secondes d'inactivité
+            let inactivityTimer = setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 30000);
+            
+            // Réinitialiser le timer en cas d'interaction
+            document.addEventListener('click', () => {
+                clearTimeout(inactivityTimer);
+                inactivityTimer = setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 30000);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,645 @@
+/* ============================================================================
+   AMÉLIORATIONS CSS POUR CHAT ET PROFIL
+   À ajouter à Chat.css et Profil.css
+   ============================================================================ */
+
+/* ============================================================================
+   CHAT - BOUTON SUPPRIMER CONVERSATION
+   ============================================================================ */
+
+.delete-conversation-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    color: #95a5a6;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.conversation-item:hover .delete-conversation-btn {
+    opacity: 1;
+}
+
+.delete-conversation-btn:hover {
+    background: #ffebee;
+    color: #e74c3c;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.delete-conversation-btn i {
+    font-size: 14px;
+}
+
+/* ============================================================================
+   CHAT - MESSAGES GROUPÉS
+   ============================================================================ */
+
+.message.grouped {
+    margin-top: 2px;
+}
+
+.message.grouped .message-content {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* ============================================================================
+   CHAT - AMÉLIORATION DU SCROLLBAR
+   ============================================================================ */
+
+.conversations-list::-webkit-scrollbar,
+.messages-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.conversations-list::-webkit-scrollbar-track,
+.messages-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.conversations-list::-webkit-scrollbar-thumb,
+.messages-container::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 10px;
+    transition: background 0.3s ease;
+}
+
+.conversations-list::-webkit-scrollbar-thumb:hover,
+.messages-container::-webkit-scrollbar-thumb:hover {
+    background: #a0aec0;
+}
+
+/* ============================================================================
+   CHAT - ANIMATION D'ENTRÉE DES MESSAGES
+   ============================================================================ */
+
+@keyframes messageSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.message {
+    animation: messageSlideIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ============================================================================
+   CHAT - INDICATEUR DE FRAPPE (OPTIONNEL)
+   ============================================================================ */
+
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background: #f0f0f0;
+    border-radius: 20px;
+    width: fit-content;
+    margin-bottom: 10px;
+}
+
+.typing-indicator span {
+    height: 8px;
+    width: 8px;
+    background: #95a5a6;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 2px;
+    animation: typingAnimation 1.4s infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typingAnimation {
+    0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.7;
+    }
+    30% {
+        transform: translateY(-10px);
+        opacity: 1;
+    }
+}
+
+/* ============================================================================
+   PROFIL - BOUTON ÉDITER
+   ============================================================================ */
+
+.edit-profile-btn {
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.edit-profile-btn:active {
+    transform: scale(0.95) rotate(0deg) !important;
+}
+
+/* ============================================================================
+   PROFIL - MODAL D'ÉDITION
+   ============================================================================ */
+
+.profile-edit-modal {
+    backdrop-filter: blur(5px);
+}
+
+.profile-edit-content {
+    animation: modalSlideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ============================================================================
+   PROFIL - BADGES
+   ============================================================================ */
+
+.badge-item {
+    animation: badgePopIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation-fill-mode: both;
+}
+
+.badge-item:nth-child(2) { animation-delay: 0.1s; }
+.badge-item:nth-child(3) { animation-delay: 0.2s; }
+.badge-item:nth-child(4) { animation-delay: 0.3s; }
+
+@keyframes badgePopIn {
+    from {
+        opacity: 0;
+        transform: scale(0) rotate(-45deg);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+/* ============================================================================
+   PROFIL - STATISTIQUES ANIMÉES
+   ============================================================================ */
+
+.profil-stat-number,
+.user-stat-number {
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.profil-stat-card:hover .profil-stat-number,
+.user-stat-card:hover .user-stat-number {
+    transform: scale(1.2);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================================================
+   ADMIN - PARAMÈTRES
+   ============================================================================ */
+
+.settings-section {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.settings-section:hover {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.settings-section-title {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.settings-section-title i {
+    font-size: 22px;
+    color: #3498db;
+}
+
+.settings-grid {
+    display: grid;
+    gap: 20px;
+}
+
+.setting-item {
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.setting-item:hover {
+    background: #e9ecef;
+    transform: translateX(5px);
+}
+
+.setting-item label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.setting-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    cursor: pointer;
+    accent-color: #3498db;
+}
+
+.setting-description {
+    margin: 8px 0 0 32px;
+    color: #7f8c8d;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* ============================================================================
+   ADMIN - ACTIONS DE MAINTENANCE
+   ============================================================================ */
+
+.maintenance-stats {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    color: white;
+}
+
+.maintenance-stats h3 {
+    margin: 0 0 20px 0;
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 15px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    text-align: center;
+}
+
+.stat-label {
+    font-size: 14px;
+    opacity: 0.9;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.stat-value {
+    font-size: 32px;
+    font-weight: 700;
+    display: block;
+}
+
+/* ============================================================================
+   ADMIN - BOUTONS D'ACTION
+   ============================================================================ */
+
+.maintenance-actions {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+}
+
+.maintenance-actions h3 {
+    color: #2c3e50;
+    margin: 0 0 20px 0;
+    font-size: 18px;
+}
+
+.action-buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.maintenance-btn {
+    padding: 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+}
+
+.maintenance-btn:hover {
+    border-color: #3498db;
+    background: #f8f9fa;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.maintenance-btn.danger {
+    border-color: #e74c3c;
+}
+
+.maintenance-btn.danger:hover {
+    background: #ffebee;
+    border-color: #c0392b;
+}
+
+.maintenance-btn i {
+    font-size: 28px;
+    color: #3498db;
+}
+
+.maintenance-btn.danger i {
+    color: #e74c3c;
+}
+
+.maintenance-btn span {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 14px;
+}
+
+.maintenance-btn small {
+    color: #95a5a6;
+    font-size: 12px;
+}
+
+.warning-message {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    background: #fff3cd;
+    border-left: 4px solid #f39c12;
+    border-radius: 8px;
+    color: #856404;
+}
+
+.warning-message i {
+    font-size: 20px;
+    color: #f39c12;
+}
+
+/* ============================================================================
+   ADMIN - BOUTONS DE SAUVEGARDE
+   ============================================================================ */
+
+.backup-actions {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.backup-btn {
+    flex: 1;
+    min-width: 200px;
+    padding: 18px 25px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 15px;
+}
+
+.backup-btn:first-child {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.backup-btn:nth-child(2) {
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+    color: white;
+}
+
+.backup-btn.restore {
+    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+    color: white;
+}
+
+.backup-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.backup-settings {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.backup-settings h3 {
+    color: #2c3e50;
+    margin: 0 0 15px 0;
+    font-size: 16px;
+}
+
+.backup-settings select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    background: white;
+    transition: border-color 0.2s ease;
+}
+
+.backup-settings select:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+/* ============================================================================
+   ADMIN - ACTIONS PRINCIPALES
+   ============================================================================ */
+
+.settings-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 2px solid #f0f0f0;
+}
+
+.save-settings-btn,
+.reset-settings-btn,
+.show-logs-btn {
+    flex: 1;
+    padding: 18px 30px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.save-settings-btn {
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+}
+
+.save-settings-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(46, 204, 113, 0.4);
+}
+
+.reset-settings-btn {
+    background: #95a5a6;
+    color: white;
+}
+
+.reset-settings-btn:hover {
+    background: #7f8c8d;
+    transform: translateY(-2px);
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .action-buttons-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .backup-actions {
+        flex-direction: column;
+    }
+    
+    .backup-btn {
+        width: 100%;
+    }
+    
+    .settings-actions {
+        flex-direction: column;
+    }
+    
+    .delete-conversation-btn {
+        opacity: 1;
+        right: 10px;
+    }
+}
+
+/* ============================================================================
+   ANIMATIONS GLOBALES
+   ============================================================================ */
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.pulse-animation {
+    animation: pulse 2s infinite;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.shake-animation {
+    animation: shake 0.5s;
+}
+
+/* ============================================================================
+   DARK MODE (OPTIONNEL)
+   ============================================================================ */
+
+@media (prefers-color-scheme: dark) {
+    .settings-section {
+        background: #2c3e50;
+        color: #ecf0f1;
+    }
+    
+    .setting-item {
+        background: #34495e;
+    }
+    
+    .setting-item:hover {
+        background: #3d566e;
+    }
+    
+    .setting-description {
+        color: #bdc3c7;
+    }
+    
+    .maintenance-actions {
+        background: #2c3e50;
+    }
+    
+    .maintenance-btn {
+        background: #34495e;
+        border-color: #4a5f7f;
+        color: #ecf0f1;
+    }
+    
+    .maintenance-btn:hover {
+        background: #3d566e;
+    }
+}

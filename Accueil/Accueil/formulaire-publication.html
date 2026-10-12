@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publier un article - Second Main</title>
+    <link rel="stylesheet" href="css/Accueil.css">
+    <link rel="stylesheet" href="css/Publier.css">
+    <link rel="stylesheet" href="css/FormulairePublication.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .logout-menu-btn {
+            margin-top: auto;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            margin-top: 20px;
+        }
+        
+        .logout-menu-btn button {
+            width: 100%;
+            padding: 15px 20px;
+            background-color: white;
+            border: none;
+            border-radius: 12px;
+            text-align: left;
+            font-size: 16px;
+            color: #e74c3c;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+        
+        .logout-menu-btn button i {
+            margin-right: 12px;
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .logout-menu-btn button:hover {
+            background-color: #ffebee;
+            color: #c0392b;
+            transform: translateX(5px);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- MENU GAUCHE -->
+    <div class="util">
+        <div class="n">
+            <label for="nom">Second Main</label>
+        </div>
+        <div class="b1"><button onclick="window.location.href='dashboard.html#explorerBtn'"><i class="fa fa-compass"></i><span>Explorer</span></button></div>
+        <div class="b2"><button onclick="window.location.href='dashboard.html#publierBtn'" class="active"><i class="fa fa-plus"></i><span>Publier</span></button></div>
+        <div class="b2"><button onclick="window.location.href='dashboard.html#boutiqueBtn'"><i class="fa fa-shopping-cart"></i><span>Boutique</span></button></div>
+        <div class="b3"><button onclick="window.location.href='dashboard.html#chatBtn'"><i class="fa-solid fa-comment"></i><span>Chat</span></button></div>
+        <div class="b4"><button onclick="window.location.href='dashboard.html#profilBtn'"><i class="fa-solid fa-user-large"></i><span>Profil</span></button></div>
+        
+        <!-- BOUTON DE DÉCONNEXION DANS LE MENU -->
+        <div class="logout-menu-btn">
+            <button onclick="logoutFromForm()">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Déconnexion</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- CONTENU PRINCIPAL -->
+    <div class="corp">
+        <div class="entete">
+            <h1>Publier un article</h1>
+            <p style="color: #7f8c8d; margin-top: 5px;">Catégorie : <span id="selectedCategory"></span></p>
+        </div>
+        
+        <!-- Indicateur d'étapes -->
+        <div class="step-indicator">
+            <div class="step active" id="stepIndicator1">1</div>
+            <div class="step-line" id="stepLine1"></div>
+            <div class="step" id="stepIndicator2">2</div>
+            <div class="step-line" id="stepLine2"></div>
+            <div class="step" id="stepIndicator3">3</div>
+        </div>
+        
+        <!-- Formulaire -->
+        <div class="publier-form-container">
+            <form id="publicationForm">
+                <!-- Étape 1: Informations de base -->
+                <div class="form-step" id="step1">
+                    <div class="form-section">
+                        <h3>Informations de l'article</h3>
+                        
+                        <div class="form-group">
+                            <label for="articleTitle">Titre de l'annonce *</label>
+                            <input type="text" id="articleTitle" placeholder="Ex: iPhone 12 128GB en excellent état" maxlength="100" autocomplete="off">
+                            <div class="error-message" id="titleError"></div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="articlePrice">Prix (F CFA) *</label>
+                                <div class="price-input">
+                                    <input type="number" id="articlePrice" placeholder="0" min="100" step="100" autocomplete="off">
+                                </div>
+                                <div class="error-message" id="priceError"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subcategory">Sous-catégorie</label>
+                                <select id="subcategory">
+                                    <option value="">Sélectionnez une sous-catégorie</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="articleCondition">État</label>
+                            <select id="articleCondition">
+                                <option value="Neuf">Neuf (jamais utilisé)</option>
+                                <option value="Comme neuf" selected>Comme neuf (très bon état)</option>
+                                <option value="Bon état">Bon état (quelques traces d'utilisation)</option>
+                                <option value="État correct">État correct (signes d'usure visibles)</option>
+                                <option value="À réparer">À réparer (ne fonctionne pas)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="articleDescription">Description détaillée *</label>
+                            <textarea id="articleDescription" placeholder="Décrivez votre article en détail : caractéristiques, spécifications, raisons de la vente, défauts éventuels..." autocomplete="off"></textarea>
+                            <div class="error-message" id="descriptionError"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="button" class="cancel-btn" id="cancelBtn">
+                            Annuler
+                        </button>
+                        <button type="button" class="publish-btn" id="nextBtnStep1">
+                            Suivant <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Étape 2: Photos -->
+                <div class="form-step" id="step2">
+                    <div class="form-section">
+                        <h3>Photos de l'article</h3>
+                        <p style="color: #7f8c8d; margin-bottom: 20px;">Ajoutez des photos de qualité pour mieux vendre votre article (max 10 photos)</p>
+                        
+                        <div class="image-upload-area" id="imageUpload">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                            <p id="uploadText">Glissez-déposez des images ici ou cliquez pour sélectionner</p>
+                            <input type="file" id="imageInput" accept="image/*" multiple style="display: none;">
+                        </div>
+                        
+                        <div class="image-preview-container" id="imagePreviewContainer">
+                            <!-- Les prévisualisations d'images apparaîtront ici -->
+                        </div>
+                        
+                        <div class="error-message" id="imageError"></div>
+                        
+                        <div style="color: #7f8c8d; font-size: 14px; margin-top: 15px;">
+                            <i class="fa-solid fa-lightbulb"></i> Conseil : Prenez des photos sous différents angles, en bonne lumière
+                        </div>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="button" class="cancel-btn" id="prevBtnStep2">
+                            <i class="fa-solid fa-arrow-left"></i> Précédent
+                        </button>
+                        <button type="button" class="publish-btn" id="nextBtnStep2">
+                            Suivant <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Étape 3: Localisation et contact -->
+                <div class="form-step" id="step3">
+                    <div class="form-section">
+                        <h3>Localisation et contact</h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="articleLocation">Ville/Quartier *</label>
+                                <input type="text" id="articleLocation" placeholder="Ex: Douala, Bonabéri" autocomplete="off">
+                                <div class="error-message" id="locationError"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="articleContact">Téléphone de contact *</label>
+                                <input type="tel" id="articleContact" placeholder="Ex: +237 6XX XX XX XX" autocomplete="off">
+                                <div class="error-message" id="contactError"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="deliveryOption">Options de livraison</label>
+                            <select id="deliveryOption">
+                                <option value="Meeting">Rencontre en personne uniquement</option>
+                                <option value="Delivery">Livraison possible</option>
+                                <option value="Shipping">Envoi possible (frais à la charge de l'acheteur)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="termsCheckbox">
+                                J'accepte les <a href="#" style="color: #3498db;">conditions générales</a> de vente
+                            </label>
+                            <div class="error-message" id="termsError"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; margin-top: 20px;">
+                                <p style="margin-bottom: 10px; font-weight: 500;">Conseils de sécurité :</p>
+                                <ul style="color: #7f8c8d; font-size: 14px; padding-left: 20px;">
+                                    <li>Rencontrez les acheteurs dans des lieux publics</li>
+                                    <li>Ne communiquez pas vos informations personnelles sensibles</li>
+                                    <li>Vérifiez les billets de banque lors des transactions en espèces</li>
+                                    <li>Privilégiez les transactions en journée</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="button" class="cancel-btn" id="prevBtnStep3">
+                            <i class="fa-solid fa-arrow-left"></i> Précédent
+                        </button>
+                        <button type="button" class="publish-btn" id="publishBtnFinal">
+                            Publier l'annonce <i class="fa-solid fa-check"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function logoutFromForm() {
+    if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+        localStorage.clear();
+        window.location.href = 'login.html';
+    }
+}
+</script>
+
+<script src="js/FormulairePublication.js"></script>
+</body>
+</html>

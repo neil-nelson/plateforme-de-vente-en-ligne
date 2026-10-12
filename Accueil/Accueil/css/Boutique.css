@@ -1,0 +1,290 @@
+/* Boutique.css - Styles pour la boutique */
+
+.boutique-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.stat-card {
+    background-color: white;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.stat-number {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.stat-annonces {
+    color: #3498db;
+}
+
+.stat-vendus {
+    color: #2ecc71;
+}
+
+.stat-vues {
+    color: #9b59b6;
+}
+
+.stat-revenus {
+    color: #f39c12;
+}
+
+.stat-label {
+    color: #7f8c8d;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.boutique-annonces {
+    background-color: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin-top: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.boutique-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.boutique-header h2 {
+    color: #2c3e50;
+    font-size: 24px;
+}
+
+.add-annonce-btn {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.add-annonce-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.empty-annonces {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.empty-annonces i {
+    font-size: 64px;
+    color: #bdc3c7;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.empty-annonces h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 22px;
+}
+
+.empty-annonces p {
+    color: #7f8c8d;
+    margin-bottom: 25px;
+    font-size: 16px;
+}
+
+.empty-btn {
+    margin-top: 10px;
+}
+
+.boutique-article-card {
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    border: 1px solid #eee;
+}
+
+.boutique-article-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.boutique-article-image {
+    height: 200px;
+    background-color: #ecf0f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.boutique-article-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.boutique-article-card:hover .boutique-article-image img {
+    transform: scale(1.05);
+}
+
+.sold-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #e74c3c;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    z-index: 1;
+}
+
+.boutique-article-info {
+    padding: 20px;
+}
+
+.boutique-article-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #2c3e50;
+    height: 40px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.boutique-article-price {
+    font-size: 20px;
+    font-weight: 700;
+    color: #e74c3c;
+    margin-bottom: 5px;
+}
+
+.boutique-article-location {
+    font-size: 14px;
+    color: #7f8c8d;
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.boutique-article-location i {
+    margin-right: 5px;
+    font-size: 12px;
+}
+
+.boutique-article-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #95a5a6;
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+    margin-bottom: 15px;
+}
+
+.boutique-article-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.boutique-article-actions button {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    color: #555;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.boutique-article-actions .edit-btn {
+    color: #3498db;
+}
+
+.boutique-article-actions .delete-btn {
+    color: #e74c3c;
+}
+
+.boutique-article-actions button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.boutique-article-actions .edit-btn:hover {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.boutique-article-actions .delete-btn:hover {
+    background-color: #e74c3c;
+    color: white;
+    border-color: #e74c3c;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .boutique-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .boutique-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .add-annonce-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .boutique-article-actions {
+        flex-direction: column;
+    }
+    
+    .stat-card {
+        padding: 20px 15px;
+    }
+    
+    .stat-number {
+        font-size: 28px;
+    }
+}

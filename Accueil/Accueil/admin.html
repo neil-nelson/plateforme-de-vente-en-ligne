@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Second Main - Administration</title>
+    <link rel="stylesheet" href="css/Accueil.css">
+    <link rel="stylesheet" href="css/Chat.css">
+    <link rel="stylesheet" href="css/Profil.css">
+    <link rel="stylesheet" href="css/Publier.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/admin-validation.css">
+    <link rel="stylesheet" href="css/improvements.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+<div class="container">
+    <!-- MENU GAUCHE ADMIN -->
+    <div class="util">
+        <div class="n">
+            <label for="nom">Admin Panel</label>
+        </div>
+
+        <div class="b1"><button id="explorerBtn" class="active"><i class="fa fa-compass"></i><span>Explorer</span></button></div>
+        <div class="b2"><button id="validerBtn"><i class="fa fa-check-circle"></i><span>Valider</span></button></div>
+        <div class="b3"><button id="chatBtn"><i class="fa-solid fa-comment"></i><span>Chat</span></button></div>
+        <div class="b4"><button id="profilBtn"><i class="fa-solid fa-user-large"></i><span>Profil</span></button></div>
+        
+        <!-- NOUVEL ONGLET PARAMÈTRES -->
+        <div class="b5"><button id="parametresBtn"><i class="fa-solid fa-gear"></i><span>Paramètres</span></button></div>
+        
+        <!-- BOUTON DE DÉCONNEXION DANS LE MENU -->
+        <div class="logout-menu-btn">
+            <button id="menuLogoutBtn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Déconnexion</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- CONTENU PRINCIPAL -->
+    <!-- SECTION EXPLORER (par défaut) -->
+    <div class="corp" id="explorerContent">
+        <div class="entete">
+            <h1>Tableau de Bord Administrateur</h1>
+            <p style="color: #7f8c8d; margin-top: 5px;">Gestion des annonces et des utilisateurs</p>
+        </div>
+
+        <!-- Statistiques Admin -->
+        <div class="admin-stats">
+            <div class="stat-card admin-stat-pending">
+                <h3 class="stat-number">0</h3>
+                <p class="stat-label">En attente</p>
+            </div>
+            <div class="stat-card admin-stat-validated">
+                <h3 class="stat-number">0</h3>
+                <p class="stat-label">Validées</p>
+            </div>
+            <div class="stat-card admin-stat-rejected">
+                <h3 class="stat-number">0</h3>
+                <p class="stat-label">Rejetées</p>
+            </div>
+            <div class="stat-card admin-stat-users">
+                <h3 class="stat-number">0</h3>
+                <p class="stat-label">Utilisateurs</p>
+            </div>
+        </div>
+        
+        <!-- BARRE DE RECHERCHE -->
+        <div class="entete">
+            <div class="recherche">
+                <i class="fa fa-search"></i>
+                <input type="text" placeholder="Rechercher un article...">
+                <i class="fa fa-sliders-h"></i>
+            </div>
+        </div>
+
+        <!-- CATEGORIES -->
+        <div class="ligne1">
+            <button class="tous active"><i class="fa-solid fa-list"></i><span>Tous</span></button>
+            <button class="elec"><i class="fa-solid fa-mobile-screen"></i><span>Électronique</span></button>
+            <button class="mode"><i class="fa-solid fa-shirt"></i><span>Mode</span></button>
+            <button class="agro"><i class="fa-solid fa-tractor"></i><span>Agroalimentaire</span></button>
+            <button class="immo"><i class="fa-solid fa-building"></i><span>Immobilier</span></button>
+        </div>
+        
+        <!-- ARTICLES -->
+        <div class="artice">
+            <!-- Les articles seront chargés dynamiquement ici via JavaScript -->
+        </div>
+    </div>
+
+    <!-- SECTION VALIDER -->
+    <div class="corp valider-content" id="validerContent" style="display: none;">
+        <div class="entete">
+            <h1>Validation des Annonces</h1>
+            <p style="color: #7f8c8d; margin-top: 5px;">Examinez et validez ou rejetez les annonces soumises</p>
+        </div>
+        
+        <!-- Filtres -->
+        <div class="validation-filters">
+            <button class="filter-btn active" data-filter="pending">
+                <i class="fa-solid fa-clock"></i> En attente
+                <span class="filter-count">0</span>
+            </button>
+            <button class="filter-btn" data-filter="validated">
+                <i class="fa-solid fa-check-circle"></i> Validées
+                <span class="filter-count">0</span>
+            </button>
+            <button class="filter-btn" data-filter="rejected">
+                <i class="fa-solid fa-times-circle"></i> Rejetées
+                <span class="filter-count">0</span>
+            </button>
+            <button class="filter-btn" data-filter="all">
+                <i class="fa-solid fa-layer-group"></i> Toutes
+                <span class="filter-count">0</span>
+            </button>
+        </div>
+        
+        <!-- Liste des annonces à valider -->
+        <div class="validation-list">
+            <div class="empty-validation">
+                <i class="fa-solid fa-clipboard-check"></i>
+                <h3>Aucune annonce à valider</h3>
+                <p>Toutes les annonces ont été traitées</p>
+            </div>
+            
+            <!-- Les annonces à valider apparaîtront ici dynamiquement -->
+        </div>
+    </div>
+
+    <!-- SECTION PROFIL -->
+    <div class="corp profil-content" id="profilContent" style="display: none;">
+        <div class="entete">
+            <h1>Profil Administrateur</h1>
+        </div>
+        
+        <!-- Info admin -->
+        <div class="profil-container">
+            <div class="profil-header">
+                <div class="profil-avatar admin-avatar">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <div class="profil-info">
+                    <h2 id="adminNameDisplay">Administrateur</h2>
+                    <p id="adminRoleDisplay">Super Administrateur</p>
+                </div>
+            </div>
+            
+            <!-- Stats Admin -->
+            <div class="profil-stats">
+                <div class="profil-stat-card">
+                    <h3 class="profil-stat-number profil-stat-users">0</h3>
+                    <p class="profil-stat-label">Utilisateurs</p>
+                </div>
+                <div class="profil-stat-card">
+                    <h3 class="profil-stat-number profil-stat-annonces">0</h3>
+                    <p class="profil-stat-label">Annonces totales</p>
+                </div>
+                <div class="profil-stat-card">
+                    <h3 class="profil-stat-number profil-stat-moderees">0</h3>
+                    <p class="profil-stat-label">Modérées aujourd'hui</p>
+                </div>
+                <div class="profil-stat-card">
+                    <h3 class="profil-stat-number profil-stat-supprimees">0</h3>
+                    <p class="profil-stat-label">Supprimées</p>
+                </div>
+            </div>
+            
+            <!-- Actions Admin -->
+            <div class="admin-actions">
+                <h3 class="stats-title">Actions Administrateur</h3>
+                <div class="action-buttons">
+                    <button class="action-btn" id="manageUsersBtn">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Gérer les utilisateurs</span>
+                    </button>
+                    <button class="action-btn" id="viewReportsBtn">
+                        <i class="fa-solid fa-flag"></i>
+                        <span>Voir les signalements</span>
+                    </button>
+                    <button class="action-btn" id="systemStatsBtn">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span>Statistiques système</span>
+                    </button>
+                    <button class="action-btn" id="backupBtn">
+                        <i class="fa-solid fa-database"></i>
+                        <span>Sauvegarde</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- BOUTON DE DÉCONNEXION -->
+            <button id="adminLogoutBtn" class="logout-button">
+                <i class="fa-solid fa-right-from-bracket"></i> Se déconnecter
+            </button>
+        </div>
+    </div>
+
+    <!-- SECTION CHAT -->
+    <div class="corp chat-content" id="chatContent" style="display: none;">
+        <!-- Interface chat complète -->
+        <div class="chat-fullscreen">
+            <div class="chat-fullscreen-header">
+                <h1><i class="fa-solid fa-comment"></i> Support Utilisateurs</h1>
+                <div class="chat-header-actions">
+                    <button class="new-conversation-btn">
+                        <i class="fa-solid fa-plus"></i> Nouvelle conversation
+                    </button>
+                    <button class="refresh-btn-full">
+                        <i class="fa-solid fa-arrows-rotate"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="chat-fullscreen-search">
+                <i class="fa fa-search"></i>
+                <input type="text" placeholder="Rechercher une conversation...">
+            </div>
+
+            <div class="chat-main-container">
+                <div class="conversations-list">
+                    <!-- Les conversations seront chargées dynamiquement ici -->
+                </div>
+
+                <div class="active-conversation">
+                    <div class="conversation-header-active">
+                        <div class="active-user">
+                            <div class="active-avatar">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <div>
+                                <h3>Sélectionnez une conversation</h3>
+                                <p class="user-status">En ligne</p>
+                            </div>
+                        </div>
+                        <div class="conversation-actions">
+                            <button class="call-btn">
+                                <i class="fa-solid fa-phone"></i>
+                            </button>
+                            <button class="video-btn">
+                                <i class="fa-solid fa-video"></i>
+                            </button>
+                            <button class="info-btn">
+                                <i class="fa-solid fa-info-circle"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="messages-container">
+                        <!-- Les messages apparaîtront ici dynamiquement -->
+                    </div>
+
+                    <div class="message-input-container">
+                        <button class="emoji-btn">
+                            <i class="fa-regular fa-face-smile"></i>
+                        </button>
+                        <button class="attach-btn">
+                            <i class="fa-solid fa-paperclip"></i>
+                        </button>
+                        <input type="text" placeholder="Tapez votre message..." class="message-input">
+                        <button class="send-btn">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="empty-conversation-state">
+                    <div class="empty-icon">
+                        <i class="fa-regular fa-comments"></i>
+                    </div>
+                    <h3>Sélectionnez une conversation</h3>
+                    <p>Choisissez une conversation dans la liste pour commencer à discuter</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOUVELLE SECTION PARAMÈTRES -->
+    <div class="corp parametres-content" id="parametresContent" style="display: none;">
+        <div class="entete">
+            <h1><i class="fa-solid fa-gear"></i> Paramètres d'Administration</h1>
+            <p style="color: #7f8c8d; margin-top: 5px;">Configurer les paramètres système et de modération</p>
+        </div>
+
+        <div class="settings-container">
+            <!-- Paramètres Généraux -->
+            <div class="settings-section">
+                <h2 class="settings-section-title">
+                    <i class="fa-solid fa-sliders-h"></i> Paramètres Généraux
+                </h2>
+                <div class="settings-grid">
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="autoApproveCheck" checked>
+                            <span class="setting-label">Validation automatique des annonces</span>
+                        </label>
+                        <p class="setting-description">Les nouvelles annonces seront automatiquement validées sans modération manuelle</p>
+                    </div>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="emailNotificationsCheck" checked>
+                            <span class="setting-label">Notifications par email</span>
+                        </label>
+                        <p class="setting-description">Recevoir des notifications par email pour les nouvelles annonces et signalements</p>
+                    </div>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="moderationLogCheck" checked>
+                            <span class="setting-label">Journal de modération</span>
+                        </label>
+                        <p class="setting-description">Conserver un journal détaillé de toutes les actions de modération</p>
+                    </div>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="deleteLogCheck" checked>
+                            <span class="setting-label">Journal des suppressions</span>
+                        </label>
+                        <p class="setting-description">Enregistrer toutes les suppressions d'annonces et de comptes utilisateurs</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paramètres de Sécurité -->
+            <div class="settings-section">
+                <h2 class="settings-section-title">
+                    <i class="fa-solid fa-shield-halved"></i> Paramètres de Sécurité
+                </h2>
+                <div class="settings-grid">
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="twoFactorCheck">
+                            <span class="setting-label">Authentification à deux facteurs</span>
+                        </label>
+                        <p class="setting-description">Exiger une authentification à deux facteurs pour les administrateurs</p>
+                    </div>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="sessionTimeoutCheck" checked>
+                            <span class="setting-label">Déconnexion automatique</span>
+                        </label>
+                        <p class="setting-description">Déconnecter automatiquement après 30 minutes d'inactivité</p>
+                    </div>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="ipRestrictionCheck">
+                            <span class="setting-label">Restriction par IP</span>
+                        </label>
+                        <p class="setting-description">Limiter l'accès administratif à certaines adresses IP</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Maintenance et Nettoyage -->
+            <div class="settings-section">
+                <h2 class="settings-section-title" style="color: #e74c3c;">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Zone de Maintenance
+                </h2>
+                
+                <div class="maintenance-stats">
+                    <h3>Statistiques actuelles</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Annonces totales</span>
+                            <span class="stat-value" id="totalArticlesCount">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">En attente</span>
+                            <span class="stat-value" id="pendingArticlesCount">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Validées</span>
+                            <span class="stat-value" id="activeArticlesCount">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Rejetées</span>
+                            <span class="stat-value" id="rejectedArticlesCount">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="maintenance-actions">
+                    <h3>Actions de maintenance</h3>
+                    <div class="action-buttons-grid">
+                        <button class="maintenance-btn" id="clearOldArticlesBtn">
+                            <i class="fa-solid fa-trash-can-clock"></i>
+                            <span>Supprimer annonces anciennes</span>
+                            <small>Annonces de plus de 30 jours</small>
+                        </button>
+                        <button class="maintenance-btn" id="clearRejectedBtn">
+                            <i class="fa-solid fa-ban"></i>
+                            <span>Vider annonces rejetées</span>
+                            <small>Supprimer définitivement</small>
+                        </button>
+                        <button class="maintenance-btn danger" id="clearAllArticlesBtn">
+                            <i class="fa-solid fa-bomb"></i>
+                            <span>Supprimer toutes les annonces</span>
+                            <small>Action irréversible</small>
+                        </button>
+                        <button class="maintenance-btn" id="optimizeDatabaseBtn">
+                            <i class="fa-solid fa-database"></i>
+                            <span>Optimiser base de données</span>
+                            <small>Nettoyer et compresser</small>
+                        </button>
+                    </div>
+                    
+                    <div class="warning-message">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <p><strong>Attention :</strong> Les actions de suppression sont définitives. Les données ne pourront pas être récupérées.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sauvegarde et Restauration -->
+            <div class="settings-section">
+                <h2 class="settings-section-title">
+                    <i class="fa-solid fa-database"></i> Sauvegarde & Restauration
+                </h2>
+                <div class="backup-actions">
+                    <button class="backup-btn" id="manualBackupBtn">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        <span>Sauvegarde manuelle</span>
+                    </button>
+                    <button class="backup-btn" id="scheduleBackupBtn">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        <span>Configurer sauvegarde automatique</span>
+                    </button>
+                    <button class="backup-btn restore" id="restoreBackupBtn">
+                        <i class="fa-solid fa-rotate-left"></i>
+                        <span>Restaurer sauvegarde</span>
+                    </button>
+                </div>
+                
+                <div class="backup-settings">
+                    <h3>Paramètres de sauvegarde</h3>
+                    <div class="setting-item">
+                        <label>
+                            Fréquence de sauvegarde :
+                            <select id="backupFrequency">
+                                <option value="daily">Quotidienne</option>
+                                <option value="weekly" selected>Hebdomadaire</option>
+                                <option value="monthly">Mensuelle</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label>
+                            Conserver les sauvegardes pendant :
+                            <select id="backupRetention">
+                                <option value="7">7 jours</option>
+                                <option value="30" selected>30 jours</option>
+                                <option value="90">90 jours</option>
+                                <option value="365">1 an</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions de sauvegarde -->
+            <div class="settings-actions">
+                <button class="save-settings-btn" id="saveSettingsBtn">
+                    <i class="fa-solid fa-save"></i> Enregistrer les paramètres
+                </button>
+                <button class="reset-settings-btn" id="resetSettingsBtn">
+                    <i class="fa-solid fa-rotate-left"></i> Paramètres par défaut
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chargement des scripts -->
+<script src="js/admin.js"></script>
+<script src="js/Accueil.js"></script>
+<script src="js/Chat.js"></script>
+<script src="js/Profil.js"></script>
+<script src="js/cleanup.js"></script>
+<script src="js/parametres.js"></script>
+</body>
+</html>

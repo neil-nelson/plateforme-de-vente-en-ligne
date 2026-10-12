@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier l'article - Second Main</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/FormulairePublication.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="modifier-container">
+        <header class="modifier-header">
+            <h1><i class="fa-solid fa-edit"></i> Modifier l'article</h1>
+            <p>Mettez à jour les informations de votre annonce</p>
+        </header>
+        
+        <form id="modifierForm" class="modifier-form">
+            <div id="modifierContent">
+                <!-- Le contenu sera chargé dynamiquement -->
+                <div style="text-align: center; padding: 40px;">
+                    <i class="fa-solid fa-spinner fa-spin fa-2x" style="color: #3498db;"></i>
+                    <p style="margin-top: 20px; color: #7f8c8d;">Chargement de l'article...</p>
+                </div>
+            </div>
+            
+            <div class="form-actions">
+                <button type="button" class="cancel-btn" onclick="window.history.back()">
+                    <i class="fa-solid fa-times"></i> Annuler
+                </button>
+                <button type="submit" class="submit-btn">
+                    <i class="fa-solid fa-check"></i> Enregistrer les modifications
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    <script src="js/ModifierArticle.js"></script>
+</body>
+</html>

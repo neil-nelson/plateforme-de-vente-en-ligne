@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion Administrateur - Second Main</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .admin-login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .admin-login-container h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .admin-login-container .subtitle {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .admin-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            display: inline-block;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .back-to-normal {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .back-to-normal a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .back-to-normal a:hover {
+            text-decoration: underline;
+        }
+        
+        .message {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 500;
+            display: none;
+        }
+        
+        .message.error {
+            background-color: #fdedec;
+            color: #e74c3c;
+            border: 1px solid #fadbd8;
+        }
+        
+        .message.success {
+            background-color: #e8f6f3;
+            color: #27ae60;
+            border: 1px solid #d4efdf;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-login-container">
+        <div class="admin-badge">
+            <i class="fa-solid fa-user-shield"></i> PANEL ADMINISTRATEUR
+        </div>
+        
+        <h1>Connexion Admin</h1>
+        <p class="subtitle">Accès réservé aux administrateurs du système</p>
+        
+        <div id="message" class="message"></div>
+        
+        <form id="adminLoginForm">
+            <div class="form-group">
+                <label for="adminEmail"><i class="fa-solid fa-envelope"></i> Email Administrateur</label>
+                <input type="email" id="adminEmail" placeholder="admin@secondmain.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="adminPassword"><i class="fa-solid fa-lock"></i> Mot de passe</label>
+                <input type="password" id="adminPassword" placeholder="••••••••" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="adminSecret"><i class="fa-solid fa-key"></i> Code Secret Admin</label>
+                <input type="password" id="adminSecret" placeholder="Code d'accès spécial" required>
+            </div>
+            
+            <button type="submit" class="login-btn">
+                <i class="fa-solid fa-sign-in-alt"></i> Se connecter en tant qu'admin
+            </button>
+        </form>
+        
+        <div class="back-to-normal">
+            <a href="login.html"><i class="fa-solid fa-arrow-left"></i> Retour à la connexion utilisateur</a>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Créer un admin par défaut si inexistant
+            createDefaultAdmin();
+            
+            // Gestion du formulaire de connexion admin
+            const adminLoginForm = document.getElementById('adminLoginForm');
+            
+            adminLoginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('adminEmail').value;
+                const password = document.getElementById('adminPassword').value;
+                const secret = document.getElementById('adminSecret').value;
+                
+                // Code secret admin (à changer en production)
+                const ADMIN_SECRET = 'AdminSecure123!';
+                
+                // Vérifier le code secret
+                if (secret !== ADMIN_SECRET) {
+                    showMessage('Code secret admin incorrect', 'error');
+                    return;
+                }
+                
+                // Récupérer les utilisateurs
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                
+                // Chercher l'utilisateur
+                const user = users.find(u => u.email === email);
+                
+                if (!user) {
+                    showMessage('Compte admin non trouvé', 'error');
+                    return;
+                }
+                
+                // Vérifier le mot de passe
+                if (user.password !== password) {
+                    showMessage('Mot de passe incorrect', 'error');
+                    return;
+                }
+                
+                // Vérifier si c'est bien un admin
+                if (!user.isAdmin) {
+                    showMessage('Ce compte n\'a pas les droits administrateur', 'error');
+                    return;
+                }
+                
+                // Sauvegarder l'utilisateur connecté
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                localStorage.setItem('currentUserId', user.id);
+                localStorage.setItem('currentUserName', user.firstname || user.username);
+                localStorage.setItem('userLoggedIn', 'true');
+                localStorage.setItem('isAdmin', 'true');
+                
+                showMessage('Connexion admin réussie! Redirection...', 'success');
+                
+                // Redirection vers l'interface admin
+                setTimeout(() => {
+                    window.location.href = 'admin.html';
+                }, 1500);
+            });
+            
+            // Fonction pour créer un admin par défaut
+            function createDefaultAdmin() {
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                
+                // Vérifier si l'admin existe déjà
+                const adminExists = users.some(user => user.email === 'admin@secondmain.com');
+                
+                if (!adminExists) {
+                    const adminUser = {
+                        id: 'admin_' + Date.now(),
+                        firstname: 'Administrateur',
+                        lastname: 'Système',
+                        username: 'admin',
+                        email: 'admin@secondmain.com',
+                        phone: '+237 000 000 000',
+                        password: 'Admin123', // Mot de passe par défaut
+                        isAdmin: true,
+                        role: 'Super Administrateur',
+                        permissions: ['all'],
+                        createdAt: new Date().toISOString()
+                    };
+                    
+                    users.push(adminUser);
+                    localStorage.setItem('users', JSON.stringify(users));
+                    console.log('Compte administrateur par défaut créé');
+                }
+            }
+            
+            // Fonction pour afficher les messages
+            function showMessage(message, type) {
+                const messageDiv = document.getElementById('message');
+                if (messageDiv) {
+                    messageDiv.textContent = message;
+                    messageDiv.className = `message ${type}`;
+                    messageDiv.style.display = 'block';
+                    
+                    setTimeout(() => {
+                        messageDiv.style.display = 'none';
+                    }, 3000);
+                }
+            }
+            
+            // Remplir automatiquement pour les tests
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                document.getElementById('adminEmail').value = 'admin@secondmain.com';
+                document.getElementById('adminPassword').value = 'Admin123';
+                document.getElementById('adminSecret').value = 'AdminSecure123!';
+            }
+        });
+    </script>
+</body>
+</html>

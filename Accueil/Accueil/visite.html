@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Second Main - Explorer les Annonces</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/Accueil.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header */
+        .visite-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .visite-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: white;
+        }
+
+        .visite-logo i {
+            font-size: 32px;
+        }
+
+        .visite-logo h1 {
+            font-size: 28px;
+            margin: 0;
+        }
+
+        .visite-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .visite-actions a {
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .visite-actions .btn-login {
+            background: white;
+            color: #667eea;
+        }
+
+        .visite-actions .btn-register {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .visite-actions a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* Container principal */
+        .visite-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Statistiques */
+        .visite-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .stat-box i {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .stat-box.annonces i { color: #3498db; }
+        .stat-box.utilisateurs i { color: #2ecc71; }
+        .stat-box.categories i { color: #9b59b6; }
+
+        .stat-box h3 {
+            font-size: 32px;
+            margin: 10px 0;
+            color: #2c3e50;
+        }
+
+        .stat-box p {
+            color: #7f8c8d;
+            margin: 0;
+        }
+
+        /* Like button dans les cartes */
+        .like-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .like-btn i {
+            font-size: 18px;
+            color: #e74c3c;
+            transition: all 0.3s ease;
+        }
+
+        .like-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+        }
+
+        .like-btn.liked i {
+            color: #e74c3c;
+            animation: heartBeat 0.3s ease;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.3); }
+            75% { transform: scale(0.9); }
+        }
+
+        .likes-count {
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            background: #e74c3c;
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 10px;
+            min-width: 18px;
+            text-align: center;
+        }
+
+        /* Badge promotion */
+        .promo-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            z-index: 2;
+            animation: pulsePromo 2s infinite;
+        }
+
+        @keyframes pulsePromo {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Footer */
+        .visite-footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .visite-footer p {
+            margin: 10px 0;
+        }
+
+        .visite-footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .visite-header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .visite-logo h1 {
+                font-size: 22px;
+            }
+
+            .visite-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="visite-header">
+        <div class="visite-logo">
+            <i class="fas fa-recycle"></i>
+            <h1>Second Main</h1>
+        </div>
+        <div class="visite-actions">
+            <a href="login.html" class="btn-login">
+                <i class="fas fa-sign-in-alt"></i> Connexion
+            </a>
+            <a href="register.html" class="btn-register">
+                <i class="fas fa-user-plus"></i> Inscription
+            </a>
+        </div>
+    </div>
+
+    <!-- Container principal -->
+    <div class="visite-container">
+        <!-- Statistiques -->
+        <div class="visite-stats">
+            <div class="stat-box annonces">
+                <i class="fas fa-shopping-bag"></i>
+                <h3 id="totalAnnonces">0</h3>
+                <p>Annonces disponibles</p>
+            </div>
+            <div class="stat-box utilisateurs">
+                <i class="fas fa-users"></i>
+                <h3 id="totalUtilisateurs">0</h3>
+                <p>Utilisateurs actifs</p>
+            </div>
+            <div class="stat-box categories">
+                <i class="fas fa-layer-group"></i>
+                <h3>4</h3>
+                <p>Catégories</p>
+            </div>
+        </div>
+
+        <!-- Titre -->
+        <div class="entete">
+            <h1>Découvrez nos annonces</h1>
+            <p style="color: #7f8c8d; margin-top: 5px;">Trouvez les meilleures offres de seconde main</p>
+        </div>
+
+        <!-- Barre de recherche -->
+        <div class="entete">
+            <div class="recherche">
+                <i class="fa fa-search"></i>
+                <input type="text" placeholder="Rechercher un article...">
+                <i class="fa fa-sliders-h"></i>
+            </div>
+        </div>
+
+        <!-- Catégories -->
+        <div class="ligne1">
+            <button class="tous active"><i class="fa-solid fa-list"></i><span>Tous</span></button>
+            <button class="elec"><i class="fa-solid fa-mobile-screen"></i><span>Électronique</span></button>
+            <button class="mode"><i class="fa-solid fa-shirt"></i><span>Mode</span></button>
+            <button class="agro"><i class="fa-solid fa-tractor"></i><span>Agroalimentaire</span></button>
+            <button class="immo"><i class="fa-solid fa-building"></i><span>Immobilier</span></button>
+        </div>
+
+        <!-- Articles -->
+        <div class="artice" id="articlesContainer">
+            <!-- Les articles seront chargés dynamiquement -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="visite-footer">
+        <p><strong>Second Main</strong> - Votre marketplace de confiance</p>
+        <p>© 2025 Second Main. Tous droits réservés.</p>
+        <p><a href="login.html">Connexion</a> | <a href="register.html">Inscription</a></p>
+    </div>
+
+    <script src="js/visite.js"></script>
+</body>
+</html>

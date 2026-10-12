@@ -1,0 +1,363 @@
+/* admin-validation.css - Styles pour la validation admin */
+
+/* Styles pour les articles en attente */
+.validation-article-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    border-left: 4px solid #f39c12;
+}
+
+.validation-article-card.pending {
+    border-left-color: #f39c12;
+}
+
+.validation-article-card.validated {
+    border-left-color: #2ecc71;
+}
+
+.validation-article-card.rejected {
+    border-left-color: #e74c3c;
+}
+
+.validation-article-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+.validation-article-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.validation-article-user {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #3498db;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+}
+
+.user-info h4 {
+    margin: 0 0 5px 0;
+    color: #2c3e50;
+}
+
+.user-info p {
+    margin: 0;
+    color: #7f8c8d;
+    font-size: 13px;
+}
+
+.validation-article-time {
+    color: #95a5a6;
+    font-size: 13px;
+    background-color: #f8f9fa;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.validation-article-title {
+    margin: 0 0 10px 0;
+    color: #2c3e50;
+    font-size: 18px;
+}
+
+.validation-article-description {
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.validation-article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.validation-article-meta span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #7f8c8d;
+    font-size: 14px;
+    background-color: #f8f9fa;
+    padding: 5px 12px;
+    border-radius: 20px;
+}
+
+.validation-article-meta i {
+    font-size: 12px;
+}
+
+.validation-article-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.validation-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.validate-btn {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.validate-btn:hover {
+    background-color: #27ae60;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+}
+
+.reject-btn {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.reject-btn:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+.view-btn {
+    background-color: #3498db;
+    color: white;
+}
+
+.view-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+/* Filtres de validation */
+.validation-filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.filter-btn {
+    padding: 12px 20px;
+    background-color: white;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.filter-btn.active {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.filter-btn:hover:not(.active) {
+    background-color: #f8f9fa;
+    border-color: #3498db;
+}
+
+.filter-count {
+    background-color: #e74c3c;
+    color: white;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: 5px;
+}
+
+.filter-btn.active .filter-count {
+    background-color: white;
+    color: #e74c3c;
+}
+
+/* État vide */
+.empty-validation {
+    text-align: center;
+    padding: 60px 20px;
+    color: #7f8c8d;
+}
+
+.empty-validation i {
+    font-size: 64px;
+    margin-bottom: 20px;
+    color: #bdc3c7;
+}
+
+.empty-validation h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.empty-validation p {
+    font-size: 16px;
+}
+
+/* Message de validation dans le chat */
+.validation-message {
+    background-color: #f8f9fa;
+    border-left: 4px solid #3498db;
+    padding: 12px 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+}
+
+.validation-message.approved {
+    border-left-color: #2ecc71;
+    background-color: #e8f6f3;
+}
+
+.validation-message.rejected {
+    border-left-color: #e74c3c;
+    background-color: #fdedec;
+}
+
+/* Styles pour le bouton de nettoyage */
+.cleanup-btn {
+    padding: 15px 20px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    font-size: 16px;
+}
+
+.cleanup-btn:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+.cleanup-btn:active {
+    transform: translateY(0);
+}
+
+.cleanup-btn i {
+    font-size: 18px;
+}
+
+/* Styles pour la section de maintenance */
+.admin-cleanup-section {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Message d'avertissement */
+.cleanup-warning {
+    background-color: #fef5e7;
+    border: 1px solid #fad7a0;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 15px;
+    color: #b7950b;
+    font-size: 14px;
+}
+
+.cleanup-warning i {
+    margin-right: 8px;
+}
+
+/* Statistiques de nettoyage */
+.cleanup-stats {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.1);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(231, 76, 60, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cleanup-actions {
+        flex-direction: column;
+    }
+    
+    .cleanup-btn {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .validation-article-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .validation-article-actions {
+        flex-direction: column;
+    }
+    
+    .validation-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .validation-filters {
+        flex-wrap: wrap;
+    }
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Second Main - Inscription</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="icon-wrapper">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <h1>Inscription</h1>
+                <p>Créez votre compte en quelques secondes</p>
+            </div>
+
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="lastname">
+                        <i class="fas fa-user"></i> Nom
+                    </label>
+                    <input 
+                        type="text" 
+                        id="lastname" 
+                        placeholder="Votre nom" 
+                        required
+                        autocomplete="family-name">
+                </div>
+
+                <div class="form-group">
+                    <label for="firstname">
+                        <i class="fas fa-user"></i> Prénom
+                    </label>
+                    <input 
+                        type="text" 
+                        id="firstname" 
+                        placeholder="Votre prénom" 
+                        required
+                        autocomplete="given-name">
+                </div>
+
+                <div class="form-group">
+                    <label for="age">
+                        <i class="fas fa-calendar"></i> Âge
+                    </label>
+                    <input 
+                        type="number" 
+                        id="age" 
+                        min="13" 
+                        max="120" 
+                        placeholder="Votre âge" 
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-username">
+                        <i class="fas fa-at"></i> Pseudo
+                    </label>
+                    <input 
+                        type="text" 
+                        id="register-username" 
+                        placeholder="Choisissez un pseudo" 
+                        required 
+                        minlength="3"
+                        autocomplete="username">
+                    <small>Minimum 3 caractères</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-password">
+                        <i class="fas fa-lock"></i> Mot de passe
+                    </label>
+                    <input 
+                        type="password" 
+                        id="register-password" 
+                        placeholder="Créez un mot de passe" 
+                        required
+                        minlength="8"
+                        autocomplete="new-password">
+                    <small>Au moins 8 caractères</small>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-check"></i>
+                    S'inscrire
+                </button>
+            </form>
+
+            <div class="divider">
+                <span>ou</span>
+            </div>
+
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                Retour à l'accueil
+            </a>
+
+            <div class="auth-footer">
+                <p>Déjà un compte ? <a href="login.html">Connectez-vous</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/register.js"></script>
+</body>
+</html>
